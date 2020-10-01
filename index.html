@@ -1,0 +1,132 @@
+<html>
+   <head>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <script>
+         window.addEventListener('keydown', function (event) {
+             var key = event.which || event.keyCode;
+             if (key === 32) { // spacebar
+               startListening()
+             }
+           });
+
+        function detectMob() {
+          return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
+        }
+
+        if(!detectMob){
+          startListening()
+        }
+
+
+         function dis(val){
+             document.getElementById("result").value+=val
+         }
+
+         function solve(){
+             let x = document.getElementById("result").value
+             let y = eval(x)
+             document.getElementById("result").value = y
+         }
+
+         function clr(){
+             document.getElementById("result").value = ""
+         }
+
+         var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+         var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
+         var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+
+         var colors = [ 'one' , 'two' , 'three', 'four', '+', 'five', 'six', 'seven', 'eight', 'nine', '/', '*', '-'];
+         var grammar = '#JSGF V1.0; grammar colors; public <color> = ' + colors.join(' | ') + ' ;'
+
+         var recognition = new SpeechRecognition();
+         var speechRecognitionList = new SpeechGrammarList();
+         speechRecognitionList.addFromString(grammar, 1);
+         recognition.grammars = speechRecognitionList;
+         recognition.continuous = false;
+         recognition.lang = 'en-US';
+         recognition.interimResults = false;
+         recognition.maxAlternatives = 1;
+
+        function startListening() {
+        recognition.start();
+        }
+
+        recognition.onresult = function(event) {
+        var word = event.results[0][0].transcript;
+          if(word == 'clear'){
+            clr()
+          }
+          else{
+            dis(word)
+            solve();
+          }
+        }
+
+      </script>
+      <style>
+
+         input[type="button"]
+         {
+         background-color:red;
+         color: black;
+         border: solid black 2px;
+         width:100%
+         }
+
+         input[type="text"]
+         {
+         border: solid black 2px;
+         width:100%
+         }
+
+         .center {
+          margin-left: auto;
+          margin-right: auto;
+          }
+
+    </style>
+   </head>
+   <body>
+      <h1 style="text-align:center;"> Trevors Calculator </h1>
+      <p style="text-align:center;">This is a calculator with multiple input methods.</p>
+      <p style="text-align:center;">Method 1; click the buttons on-screen with your cursor.</p>
+      <p style="text-align:center;">Method 2; First, press spacebar to initiate audio. Second,<br> say a problem such as "nine times six minus eight". Finally, wait in silence<br> until the answer appears on-screen. To clear, press spacebar and say "clear." </p>
+      <table class = "center"style="width:500px; border: 1px solid black" >
+         <tr>
+            <td colspan="3"><input type="text" id="result"/></td>
+            <td><input type="button" value="c" onclick="clr()"/> </td>
+         </tr>
+         <tr>
+            <td><input type="button" value="2" onclick="dis('1')"/> </td>
+            <td><input type="button" value="2" onclick="dis('2')"/> </td>
+            <td><input type="button" value="3" onclick="dis('3')"/> </td>
+            <td><input type="button" value="/" onclick="dis('/')"/> </td>
+         </tr>
+         <tr>
+            <td><input type="button" value="4" onclick="dis('4')"/> </td>
+            <td><input type="button" value="5" onclick="dis('5')"/> </td>
+            <td><input type="button" value="6" onclick="dis('6')"/> </td>
+            <td><input type="button" value="-" onclick="dis('-')"/> </td>
+         </tr>
+         <tr>
+            <td><input type="button" value="7" onclick="dis('7')"/> </td>
+            <td><input type="button" value="8" onclick="dis('8')"/> </td>
+            <td><input type="button" value="9" onclick="dis('9')"/> </td>
+            <td><input type="button" value="+" onclick="dis('+')"/> </td>
+         </tr>
+         <tr>
+            <td><input type="button" value="." onclick="dis('.')"/> </td>
+            <td><input type="button" value="0" onclick="dis('0')"/> </td>
+            <!-- solve function call function solve to evaluate value -->
+            <td><input type="button" value="=" onclick="solve()"/> </td>
+            <td><input type="button" value="*" onclick="dis('*')"/> </td>
+         </tr>
+      </table>
+   </body>
+</html>
