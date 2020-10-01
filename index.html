@@ -15,10 +15,10 @@
            });
 
         function detectMob() {
-          return ( ( window.innerWidth <= 600 ) && ( window.innerHeight <= 600 ) );
+          return ( ( window.innerWidth <= 50 ) && ( window.innerHeight <=  ) );
         }
 
-        if(detectMob){
+        if(!detectMob){
            alert("mobile")
            startListening()
         }
