@@ -15,10 +15,10 @@
            });
 
         function detectMob() {
-          return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
+          return ( ( window.innerWidth <= 1000 ) && ( window.innerHeight <= 1000 ) );
         }
 
-        if(!detectMob){
+        if(detectMob){
            alert("mobile")
            startListening()
         }
@@ -97,7 +97,7 @@
       <h1 style="text-align:center;"> Trevors Calculator </h1>
       <p style="text-align:center;">This is a calculator with multiple input methods.</p>
       <p style="text-align:center;">Method 1; click the buttons on-screen with your cursor.</p>
-      <p style="text-align:center;">Method 2; First, press spacebar to initiate audio. Second,<br> say a problem such as "nine times six minus eight". Finally, wait in silence<br> until the answer appears on-screen. To clear, press spacebar and say "clear."<br> When using The app on a smartphone, Audio will automatically begin recording. <br> Simple reload the page each time you wish to make a new calculation. </p>
+      <p style="text-align:center;">Method 2; First, press spacebar to initiate audio. Second,<br> say a problem such as "nine times six minus eight". Finally, wait in silence<br> until the answer appears on-screen. To clear, press spacebar and say "clear."<br> When using The app on a smartphone, audio will automatically begin recording. <br> Simply reload the page each time you wish to make a new calculation. </p>
       <table class = "center"style="width:500px; border: 1px solid black" >
          <tr>
             <td colspan="3"><input type="text" id="result"/></td>
